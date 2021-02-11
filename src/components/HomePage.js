@@ -1,6 +1,7 @@
 import React from 'react';
-import UserProfile from './UserProfile'
-import Clock from './Clock'
+import { Col, Container, Row } from 'react-bootstrap';
+import Clock from './Clock';
+import UserProfile from './UserProfile';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -9,30 +10,23 @@ class HomePage extends React.Component {
       date: new Date() 
     }
   }
+
   render() {
     return(
       <div>
         <Clock/>
-        <table width='100%' border='1px solid black'>
-          <tr>
-            <td width='30%'>
-              <h2>Upcoming Games</h2>
-            </td>
-            <td width='30%'>
-              <h2>Profile</h2>
-            </td>
-            <td width='30%'>
-              <h2>Players</h2>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td>
-              <UserProfile userName='Adam'/>
-            </td>
-          </tr>
-        </table>
+        <Container>
+          <Row>
+            <Col><h2>Upcoming Games</h2></Col>
+            <Col><h2>Profile</h2></Col>
+            <Col><h2>Players</h2></Col>
+          </Row>
+          <Row>
+            <Col></Col>
+            <Col></Col>
+            <Col><UserProfile userName='Adam'/></Col>
+          </Row>
+        </Container>
       </div>
     );
   }

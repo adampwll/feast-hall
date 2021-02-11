@@ -1,12 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
-import './components/HomePage';
+import Banner from './components/Banner';
+import Container from 'react-bootstrap/Container'
 import HomePage from './components/HomePage';
 
 function App() {
   return (
     <div className="App">
-      <HomePage/>
+      <Container fluid>
+        <Banner/>
+      </Container>
+      <Container fluid>
+        <HomePage/>
+      </Container>
     </div>
   );
 }
