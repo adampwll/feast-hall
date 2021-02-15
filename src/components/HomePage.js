@@ -3,6 +3,8 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Clock from './Clock';
 import UserProfile from './UserProfile';
 
+import GetTest from './../endpoints/GetTest'
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -12,6 +14,7 @@ class HomePage extends React.Component {
   }
 
   render() {
+	GetTest();
     return(
       <div>
         <Clock/>
