@@ -1,0 +1,12 @@
+/*0-Reset: resets all styling from default html tags */
+@import '0-reset/reset.scss';
+
+/*1-Vendor: Third party stylesheets, Top layer to allow our styles to override easier*/
+
+/*2-Settings: Variables settings, colors, typography, etc to be used in sections below */
+
+/*3-Elements: Base HTML object styling, buttons, headings, etc */
+
+/*4-Components: Component Specific styling */
+
+/*5-Overrides: Special use cases, !important overrides go here, etc */

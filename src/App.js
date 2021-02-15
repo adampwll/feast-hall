@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import './styles/main.scss';
 import Banner from './components/Banner';
 import Container from 'react-bootstrap/Container'
 import HomePage from './components/HomePage';
