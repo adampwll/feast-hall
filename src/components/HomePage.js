@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import Profile from './Profile'
+import GetTest from './../endpoints/GetTest'
 
 function HomePage() {
   const [content, setContent] = useState(Profile);
@@ -9,6 +10,10 @@ function HomePage() {
     setContent(event.target.value);
   }
 
+  useEffect(() => {
+	  GetTest();
+  });
+  
   return(
     <div>
       <Container>
