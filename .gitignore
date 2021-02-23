@@ -104,3 +104,4 @@ dist
 .tern-port
 build/
 api/package-lock.json
+package-lock.json
