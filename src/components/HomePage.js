@@ -1,30 +1,45 @@
 import React, {useEffect, useState} from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
-import Profile from './Profile'
-import GetTest from './../endpoints/GetTest'
+import { Col, Container, Row, Nav } from 'react-bootstrap';
+import Profile from './content_components/Profile'
+import Games from './content_components/Games'
+import Players from './content_components/Players'
+import GetTest from '../endpoints/GetTest'
 
 function HomePage() {
-  const [content, setContent] = useState(Profile);
+  const [content, setContent] = useState();
+  let component;
 
-  function switchContent(event) {
-    setContent(event.target.value);
-  }
+  switch (content) {
+      case "Profile":
+        component = <Profile />;
+        break
+      case "Players":
+        component = <Players />;
+        break
+      default:
+        component = <Games />;
+        break
+    }
 
   useEffect(() => {
 	  GetTest();
-  });
+  }, []);
   
   return(
     <div>
-      <Container>
-        <Row>
-          <Col><h2>Upcoming Games</h2></Col>
-          <Col><h2>Profile</h2></Col>
-          <Col><h2>Players</h2></Col>
-        </Row>
-      </Container>
-      <Container>
-        {content}
+      <Nav fill variant="tabs" defaultActiveKey="/games">
+        <Nav.Item>
+          <Nav.Link eventKey="/games" onClick={() => { setContent("Games") }}>Upcoming Games</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="profile" onClick={() => { setContent("Profile") }}>Profile</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="players" onClick={() => { setContent("Players") }}>Players</Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <Container className="home-page-component-container">
+        {component}
       </Container>
     </div>
   );
