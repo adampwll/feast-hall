@@ -13,10 +13,10 @@ function Banner() {
       <Container>
         <h1>Welcome</h1>
       </Container>
-      <Container center-justified>
+      <Container center-justified="true">
         <Clock/>
       </Container>
-      <Container right-justified>
+      <Container right-justified="true">
         <Form inline>
           <FormControl placeholder="Search"/>
         </Form>
