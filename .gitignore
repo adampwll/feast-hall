@@ -106,4 +106,4 @@ build/
 api/package-lock.json
 
 #Shhhh Secret
-/apiGoogleconfig.json
+.apiGoogleconfig.json
