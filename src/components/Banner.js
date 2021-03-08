@@ -11,7 +11,6 @@ function Banner() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    console.log("im heeeere")
     ApiCalendar.onLoad(() => {
       setUser(ApiCalendar.getBasicUserProfile() || {})
     })

@@ -1,9 +1,7 @@
-
+import { calendarID, apiKey } from "../config/apiGoogleconfig.json";
 import request from 'superagent'
 import moment from "moment";
-const CALENDAR_ID = 'jl9gdt7p32alvfmfn2p85c8er0@group.calendar.google.com'
-const API_KEY = 'AIzaSyB0nRsToLMw-rH1hf40UK01Yz4l3GonTfg'
-const url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`
+const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarID}/events?key=${apiKey}`
 
 export function getEvents(callback) {
   request
@@ -16,8 +14,9 @@ export function getEvents(callback) {
             start: event.start.date ? moment(event.start.date).toDate() : moment(event.start.dateTime).toDate(),
             end: event.end.date ? moment(event.end.date).toDate() : moment(event.end.dateTime).toDate(),
             title: event.summary,
-            popup: true,
+            summary: event.summary,
             description: event.description,
+            id: event.id,
           })
         })
         callback(events)
