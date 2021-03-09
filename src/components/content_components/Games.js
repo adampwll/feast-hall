@@ -74,6 +74,9 @@ function Games() {
         </tbody>
       </Table>
       <Calendar
+        views={{
+          month: true,
+        }}
         localizer={localizer}
         events={games}
         startAccessor="start"
