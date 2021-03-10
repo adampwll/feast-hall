@@ -1,17 +1,31 @@
 const createError = require('http-errors')
+const mongoose = require('mongoose');
 const express = require('express')
 const path = require('path')
+const app = express()
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const db = require('../config/keys').mongoURI;
 
 /**
 * Routes
 */
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+
 const routes = {
 	"/": require('./routes/index'),
+	"/armies/": require('./routes/armies'),
 }
 
-const app = express()
+// MongoDB
+
+mongoose
+	.connect(db, { useUnifiedTopology: true, useNewUrlParser: true })
+	.then(() => console.log("Connected to MongoDB successfully"))
+	.catch(err => console.log(err));
 
 app.use(function (req, res, next) {
 	// Website you wish to allow to connect
@@ -36,9 +50,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500)
   res.send(err)
 })
-//Boilerplate that is unneeded now, but may be useful later
-//app.use(express.json());
-//app.use(express.urlencoded({ extended: false }));
-//app.use(cookieParser());
 
 module.exports = app

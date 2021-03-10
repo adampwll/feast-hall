@@ -1,5 +1,5 @@
 import { Modal, Button, InputGroup, FormControl, Form, Col, Row, } from 'react-bootstrap';
-import { calendarID } from '../../config/apiGoogleconfig.json';
+import { calendarID } from '../../apiGoogleconfig.json';
 import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
 import moment from "moment";
 import { useState, useEffect } from 'react';

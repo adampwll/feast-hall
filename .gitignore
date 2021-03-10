@@ -106,4 +106,5 @@ build/
 api/package-lock.json
 
 #Shhhh Secret
-/src/config/apiGoogleconfig.json
+*apiGoogleconfig.json
+/config/keys_dev.js

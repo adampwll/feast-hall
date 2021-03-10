@@ -5,7 +5,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import { getEvents } from '../Calendar'
 import CreateEventModal from '../modal_components/CreateEventModal'
 import ViewEventModal from '../modal_components/ViewEventModal'
-import { calendarID } from '../../config/apiGoogleconfig.json';
+import { calendarID } from '../../apiGoogleconfig.json';
 import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
 require('react-big-calendar/lib/css/react-big-calendar.css')
 
