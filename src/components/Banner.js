@@ -21,16 +21,17 @@ function Banner() {
     return options[Math.floor(Math.random() * options.length)]
   }
 
-  let handleLogIn = () => {
-    ApiCalendar.handleAuthClick()
-    ApiCalendar.listenSign(() => {
-      setUser(ApiCalendar.getBasicUserProfile() || {})
-    })
-  }
+  let handleAuth = () => {
+    if (user.nt) {
+      setUser({})
+      ApiCalendar.handleSignoutClick();
+    } else {
+      ApiCalendar.handleAuthClick()
+      ApiCalendar.listenSign(() => {
+        setUser(ApiCalendar.getBasicUserProfile() || {})
+      })
+    }
 
-  let handleLogOut = () => {
-    setUser({})
-    ApiCalendar.handleSignoutClick();
   }
 
   return( 
@@ -45,11 +46,7 @@ function Banner() {
         <Form inline>
           <FormControl placeholder="Search"/>
         </Form>
-        {
-          user.jI ?
-          <button onClick={() => { handleLogOut() }} style={{ backgroundImage: `url(${user.jI})`, height: "50px", width: "50px", backgroundPosition: "center", backgroundSize: "cover", borderRadius: "50px", border: "0px" }}></button> :
-          <button onClick={() => { handleLogIn() }} style={{ backgroundImage: `url()`, height: "50px", width: "50px", backgroundPosition: "center", backgroundSize: "cover", borderRadius: "50px", border: "0px" }}></button>
-        }
+        <button onClick={() => { handleAuth() }} className="banner-profile-button" style={{ backgroundImage: `url(${user.jI || " "})` }}></button> :
       </Container>
     </Navbar>
   );

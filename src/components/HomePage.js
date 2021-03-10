@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { Col, Container, Row, Nav } from 'react-bootstrap';
-import Profile from './content_components/Profile'
-import Games from './content_components/Games'
-import Players from './content_components/Players'
+import Profile from './home_page_components/Profile'
+import Games from './home_page_components/Games'
+import Players from './home_page_components/Players'
 import GetTest from '../endpoints/GetTest'
 
 function HomePage() {

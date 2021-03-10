@@ -3,18 +3,16 @@ import { Table } from "react-bootstrap";
 import moment from "moment";
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import { getEvents } from '../Calendar'
-import CreateEventModal from '../modal_components/CreateEventModal'
-import ViewEventModal from '../modal_components/ViewEventModal'
+import CreateEventModal from '../EventModal'
 import { calendarID } from '../../apiGoogleconfig.json';
 import ApiCalendar from 'react-google-calendar-api/src/ApiCalendar';
 require('react-big-calendar/lib/css/react-big-calendar.css')
 
 function Games() {
   const [games, setGames] = useState([]);
-  const [event, setEvent] = useState({summary: "", description: "", start: "", end: ""});
+  const [event, setEvent] = useState({});
   const [modalShow, setModalShow] = useState(false);
-  const [viewModalShow, setViewModalShow] = useState(false);
-  const localizer = momentLocalizer(moment);
+  const [modalType, setModalType] = useState("");
 
   useEffect(() => {
     getEvents((events) => {
@@ -24,18 +22,30 @@ function Games() {
   }, []);
 
   const handleDateClick = e => {
-    let newEvent = {}
-    newEvent.startDate = moment(e.start.toString()).format("yyyy-MM-DD")
-    newEvent.endDate = moment(e.end.toString()).format("yyyy-MM-DD")
-    newEvent.startTime = "12:00:00"
-    newEvent.endTime = "12:00:00"
-    setEvent(newEvent)
+    setEvent({
+      summary: "",
+      description: "",
+      startDate: moment(e.start.toString()).format("yyyy-MM-DD"),
+      endDate: moment(e.end.toString()).format("yyyy-MM-DD"),
+      startTime: "12:00:00",
+      endTime: "12:00:00"
+    })
+    setModalType("Create");
     setModalShow(true);
   }
 
   const handleEventClick = e => {
-    setEvent(e)
-    setViewModalShow(true);
+    setEvent({
+      summary: e.summary || "",
+      description: e.description || "",
+      startDate: moment(e.start).format("yyyy-MM-DD"),
+      endDate: moment(e.end).format("yyyy-MM-DD"),
+      startTime: moment(e.start).format("H:mm:ss"),
+      endTime: moment(e.end).format("H:mm:ss"),
+      id: e.id
+    });
+    setModalType("Edit");
+    setModalShow(true);
   }
 
   const showUpcoming = () => {
@@ -50,9 +60,9 @@ function Games() {
       if (tempList[i]) {
         gamesList.push(
         <tr key={`upcoming_${i}`}>
-            <td>{tempList[i].summary}</td>
-            <td>{moment(tempList[i].start).format("ddd, MMM DD yyyy (h:mm a)")}</td>
-            <td></td>
+          <td>{tempList[i].summary}</td>
+          <td>{moment(tempList[i].start).format("ddd, MMM DD yyyy (h:mm a)")}</td>
+          <td></td>
         </tr>);
       }
     }
@@ -61,13 +71,14 @@ function Games() {
 
   return (
     <div>
-      <h3>Games</h3>
-      <h4 style={{ textAlign: "center" }}>Upcoming Games</h4>
+      <h3 style={{ textAlign: "center" }} >Games</h3>
       <Table striped bordered hover size="sm">
         <thead>
-          <th>Summary</th>
-          <th>Time</th>
-          <th>Players</th>
+          <tr>
+            <th>Summary</th>
+            <th>Time</th>
+            <th>Players</th>
+          </tr>
         </thead>
         <tbody>
           { showUpcoming() }
@@ -77,11 +88,11 @@ function Games() {
         views={{
           month: true,
         }}
-        localizer={localizer}
+        localizer={momentLocalizer(moment)}
         events={games}
         startAccessor="start"
         endAccessor="end"
-        selectable={"true"}
+        selectable={true}
         tooltipAccessor={"start"}
         style={{ height: 500 }}
         onSelectEvent={ e => { handleEventClick(e) }}
@@ -94,16 +105,7 @@ function Games() {
           getEvents((events) => {
             setGames(events)
           })}}
-        event={event}
-      />
-      <ViewEventModal
-        show={viewModalShow}
-        onHide={() => {
-          setViewModalShow(false)
-          getEvents((events) => {
-            setGames(events)
-          })
-        }}
+        modaltype={modalType}
         event={event}
       />
     </div>
