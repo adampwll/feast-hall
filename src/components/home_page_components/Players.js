@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react"
 import {useEffect, useState} from 'react';
 import { Table } from "react-bootstrap";
 
