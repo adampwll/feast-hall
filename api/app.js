@@ -2,10 +2,10 @@ const createError = require('http-errors')
 const mongoose = require('mongoose');
 const express = require('express')
 const path = require('path')
-const app = express()
-const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const db = require('../config/keys').mongoURI;
+
+const app = express()
 
 /**
 * Routes
